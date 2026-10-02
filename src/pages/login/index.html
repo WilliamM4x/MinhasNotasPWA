@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+  
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <meta content="web_blank" name="shell-type" />
+
+  <link rel="manifest" href="/app.webmanifest" />
+  <link rel="service-worker" href="/sw.js" />
+
+  <title>Minha Agenda - Login</title>
+  
+  <link rel="stylesheet" href="/styles.css" />
+  
+  <!-- Fontes do Google -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet" />
+</head>
+
+<body class="bg-surface font-body-md text-on-surface antialiased min-h-screen flex items-center justify-center">
+  <main class="w-full max-w-md mx-auto p-space-lg">
+    <div class="flex flex-col w-full">
+      <div
+        class="relative w-full bg-surface-container-lowest rounded-xl shadow-md p-space-xl flex flex-col items-center">
+        <!-- Ambient subtle background glow -->
+        <div
+          class="absolute -top-10 -right-10 w-44 h-44 rounded-full bg-secondary-container/20 blur-3xl pointer-events-none">
+        </div>
+        <div
+          class="absolute -bottom-8 -left-8 w-40 h-40 rounded-full bg-primary-fixed-dim/20 blur-2xl pointer-events-none">
+        </div>
+        <!-- Header & Brand Logo -->
+        <div class="flex flex-col items-center text-center relative z-10 w-full mb-space-lg">
+          <div
+            class="w-16 h-16 rounded-xl bg-surface-container-low p-2.5 flex items-center justify-center shadow-sm mb-space-sm">
+            <img alt="Minha agenda Logo" class="w-full h-full object-contain"
+              src="https://lh3.googleusercontent.com/aida/AEtjO1UsYyq5Tb0bXbYa82n1M57zC7wdQsdKg7A1uO8OJmxvMR6NIA-EMmfoodiwfYLItyXJfXzgurL8rUk0qX9v4oDlxg1LqGz9jqUuKfpr8bwM6PNkd--0lsm7NAbCFeGLMQGCx63M61pGerhaQjesnKjo-opgsNfHF3gKjHGqp4_YLcI9fgdmggEYgASHJbiDIXyPzLwmroah2XvR5dsihUY6lVFhNOFmMRfDO_YyJRra0s9IML7XciEvIztr" />
+          </div>
+          <h1 class="font-display text-display text-primary tracking-tight">Minha agenda</h1>
+          <p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Clareza e tranquilidade para o seu dia</p>
+        </div>
+        <!-- Mode Switcher Tabs -->
+        <div class="w-full p-1 bg-surface-container rounded-full flex relative z-10 mb-space-lg">
+          <button
+            class="flex-1 py-2 rounded-full font-label-md text-label-md text-on-primary bg-primary-container transition-all duration-200"
+            id="tab-login" onclick="switchAuthTab('login')">
+            Entrar
+          </button>
+          <button
+            class="flex-1 py-2 rounded-full font-label-md text-label-md text-secondary transition-all duration-200"
+            id="tab-register" onclick="switchAuthTab('register')">
+            Criar conta
+          </button>
+        </div>
+        <!-- Auth Form -->
+        <form class="w-full flex flex-col gap-space-md relative z-10" id="auth-form" onsubmit="event.preventDefault();">
+          <!-- Name Field (Register Mode Only) -->
+          <div class="hidden flex-col gap-1.5 transition-all" id="field-name">
+            <label class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1.5"
+              for="input-name">
+              <span class="material-symbols-outlined text-[16px] text-secondary">person</span>
+              Nome completo
+            </label>
+            <div class="relative w-full">
+              <input
+                class="w-full h-11 px-3.5 bg-surface-container-low rounded-lg font-body-md text-body-md text-on-surface placeholder:text-outline focus:outline-none focus:bg-surface-container-lowest focus:shadow-[0_0_0_2px_rgba(27,77,62,0.18)] transition-all"
+                id="input-name" placeholder="Ana Beatriz Santos" type="text" />
+            </div>
+          </div>
+          <!-- Email Field -->
+          <div class="flex flex-col gap-1.5">
+            <label class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1.5"
+              for="input-email">
+              <span class="material-symbols-outlined text-[16px] text-secondary">alternate_email</span>
+              E-mail
+            </label>
+            <div class="relative w-full">
+              <input
+                class="w-full h-11 px-3.5 bg-surface-container-low rounded-lg font-body-md text-body-md text-on-surface placeholder:text-outline focus:outline-none focus:bg-surface-container-lowest focus:shadow-[0_0_0_2px_rgba(27,77,62,0.18)] transition-all"
+                id="input-email" placeholder="seu@email.com" type="email" />
+            </div>
+          </div>
+          <!-- Password Field -->
+          <div class="flex flex-col gap-1.5">
+            <label class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1.5"
+              for="input-password">
+              <span class="material-symbols-outlined text-[16px] text-secondary">lock</span>
+              Senha
+            </label>
+            <div class="relative w-full flex items-center">
+              <input
+                class="w-full h-11 pl-3.5 pr-11 bg-surface-container-low rounded-lg font-body-md text-body-md text-on-surface placeholder:text-outline focus:outline-none focus:bg-surface-container-lowest focus:shadow-[0_0_0_2px_rgba(27,77,62,0.18)] transition-all"
+                id="input-password" placeholder="••••••••" type="password" />
+              <button aria-label="Alternar visibilidade da senha"
+                class="absolute right-2.5 w-8 h-8 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors focus:outline-none"
+                onclick="togglePasswordVisibility()" type="button">
+                <span class="material-symbols-outlined text-[19px]" id="password-eye-icon">visibility</span>
+              </button>
+            </div>
+          </div>
+          <!-- Additional Options (Remember Me & Forgot Password) -->
+          <div class="flex items-center justify-between pt-1" id="row-remember">
+            <label class="flex items-center gap-2 cursor-pointer select-none">
+              <input checked=""
+                class="w-4 h-4 rounded text-primary-container bg-surface-container-low accent-[#1b4d3e] focus:outline-none cursor-pointer"
+                id="checkbox-remember" type="checkbox" />
+              <span class="font-body-sm text-body-sm text-on-surface-variant">Lembrar de mim</span>
+            </label>
+            <a id="forgot-password" class="font-label-md text-label-md text-secondary hover:text-primary transition-colors"
+              href="#recuperar-senha">
+              Esqueci minha senha
+            </a>
+          </div>
+          <!-- Submit Button -->
+          <button
+            class="w-full h-12 mt-space-sm bg-primary-container hover:bg-tertiary-container text-on-primary font-label-md text-label-md rounded-xl shadow-sm transition-all duration-150 flex items-center justify-center gap-2 active:scale-[0.99]"
+            id="submit-button" type="submit">
+            <span id="button-label">Acessar minha agenda</span>
+            <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+          </button>
+        </form>
+        <!-- PWA Offline Readiness Badge -->
+        <div class="mt-space-xl pt-space-md w-full flex items-center justify-center">
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-surface-container-low rounded-full">
+            <span class="relative flex h-2 w-2">
+              <span
+                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary-fixed opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-secondary"></span>
+            </span>
+            <span id="installButton"
+              class="btn-install font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+              <span class="material-symbols-outlined text-[14px] text-secondary">cloud_done</span>
+              Disponível offline · Instalar app
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="/app.js"></script>
+  <script src="login.js"></script>
+</body>
+
+</html>

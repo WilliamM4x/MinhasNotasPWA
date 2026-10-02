@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="manifest" href="app.webmanifest" />
+
+    <title>Minha Agenda</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Redirect ...</h1>
+
+    </header>
+    <main>
+     
+    </main>
+
+    <script>
+        // Se já estiver autenticado vai pro dashboard, se não vai pro login
+        const usuarioLogado = localStorage.getItem("usuario");
+        console.log(usuarioLogado);
+        if (usuarioLogado) {
+            window.location.replace("/src/pages/dashboard/");
+        } else {
+            window.location.replace("/src/pages/dashboard/");
+        }
+    </script> 
+
+    <script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

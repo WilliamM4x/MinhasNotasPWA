@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="web_dashboard" name="shell-type">
+
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="manifest" href="/app.webmanifest" />
+  <title>Dashboard</title>
+
+
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+
+<body class="bg-surface font-body-md text-on-surface antialiased">
+  <aside
+    class="fixed left-0 top-0 h-full w-64 bg-surface-container-low z-50 flex flex-col justify-between py-6 px-4 shadow-[0_1px_8px_rgba(0,0,0,0.04)]">
+    <div class="flex flex-col gap-6">
+      <div class="flex items-center gap-3 px-2">
+        <span class="font-title-sm text-title-sm text-primary tracking-tight">Minha agenda</span>
+      </div>
+      <nav class="flex flex-col gap-1.5"
+        data-active-classes="bg-primary-container text-on-primary font-title-sm text-title-sm rounded-xl"><a
+          aria-current="page"
+          class="flex items-center gap-3 px-3 py-2.5 transition-colors bg-primary-container text-on-primary font-title-sm text-title-sm rounded-xl"
+          data-path="dashboard" href="#"><span
+            class="material-symbols-outlined text-[20px]">grid_view</span>Dashboard</a>
+      </nav>
+    </div>
+    <div class="flex flex-col gap-2 pt-4">
+      <div class="flex items-center gap-3 px-2 py-2"><img alt="Profile" class="w-8 h-8 rounded-full object-cover"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuAW3Ik2gd3DmRwz4bm87mG80NGrwhzvXDo11MnEf6kemORq_DPmy3r8Gs3cwf6k5F1rwSbCkHlG_oLduYgQ6rg6Caezfgv1fv43xFkUhM9fIFQ5nRXBxscoQn5jVEbA4QYf7Yt2KMlr2EioiVNlu5Bv7ZvC9_ngdZIOdxYvJELv475So8iO9j1UyFfN5P4iF0MAeUY0lDOaXwmI58RjuGMiG-8m0Fre1A5fJ-effzr7lnlHIq51WkfyAg">
+        <div class="flex flex-col flex-1 min-w-0"><span
+            class="font-label-md text-label-md text-on-surface truncate">Minha Conta</span><span
+            class="font-body-sm text-body-sm text-on-surface-variant truncate">agenda@pwa.app</span></div>
+      </div><a
+        class="flex items-center gap-3 px-3 py-2 rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-surface-container hover:text-error transition-colors"
+        data-path="entrar-sair" href="#"><span class="material-symbols-outlined text-[20px]">logout</span>Entrar /
+        Sair</a>
+    </div>
+  </aside>
+  <div class="pl-64">
+    <header
+      class="fixed top-0 left-64 right-0 h-16 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40">
+      <div class="w-full h-16 px-8 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <span class="font-title-sm text-title-sm text-primary tracking-tight hidden sm:inline">Minha agenda</span>
+        </div>
+        <div class="flex items-center gap-4">
+            <span
+              class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors"
+              data-path="entrar-sair" href="#"> Ola, USSER!
+            </span>
+            <img alt="Profile"
+            class="w-8 h-8 rounded-full object-cover"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAW3Ik2gd3DmRwz4bm87mG80NGrwhzvXDo11MnEf6kemORq_DPmy3r8Gs3cwf6k5F1rwSbCkHlG_oLduYgQ6rg6Caezfgv1fv43xFkUhM9fIFQ5nRXBxscoQn5jVEbA4QYf7Yt2KMlr2EioiVNlu5Bv7ZvC9_ngdZIOdxYvJELv475So8iO9j1UyFfN5P4iF0MAeUY0lDOaXwmI58RjuGMiG-8m0Fre1A5fJ-effzr7lnlHIq51WkfyAg">
+        </div>
+      </div>
+    </header>
+    <main class="relative pt-16 bg-surface w-full px-8">
+      <div class="flex flex-col w-full pb-16">
+        <!-- Top Greeting & Header Bar -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 pt-6 pb-8">
+          <div class="flex flex-col gap-1">
+            <div class="flex items-center gap-2">
+              <span class="inline-flex items-center justify-center w-2 h-2 rounded-full bg-secondary"></span>
+              <span><h1 class="font-headline-lg text-headline-lg text-primary tracking-tight">Olá! Aqui está o seu dia</h1></span>
+            </div>
+    
+            <p class="font-body-md text-body-md text-on-surface-variant flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-[16px] text-outline">calendar_today</span>
+              <span id="currentDateDisplay"></span>
+            </p>
+          </div>
+          <!-- Quick action button -->
+          <div class="flex items-center gap-3">
+
+            <button
+              class="inline-flex items-center gap-2 px-4 py-2 bg-primary hover:bg-tertiary text-on-primary font-title-sm text-title-sm rounded-xl shadow-sm transition-all active:scale-[0.98]"
+              id="btnOpenNewTaskModal">
+              <span class="material-symbols-outlined text-[20px]">add</span>
+              <span class="">Nova Tarefa</span>
+            </button>
+          </div>
+        </div>
+        <!-- Metrics / Quick Summary Banner -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+          <!-- Total Tarefas -->
+          <div class="bg-surface-container-lowest p-5 rounded-xl shadow-sm flex flex-col justify-between">
+            <div class="flex items-center justify-between mb-3">
+              <span class="font-label-md text-label-md text-on-surface-variant">Total de Tarefas</span>
+              <span class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+                <span class="material-symbols-outlined text-[18px]">format_list_bulleted</span>
+              </span>
+            </div>
+            <div class="flex items-baseline gap-2">
+              <span class="font-display text-display text-primary font-semibold" id="metricTotal">0</span>
+              <span class="font-body-sm text-body-sm text-outline">atividades</span>
+            </div>
+          </div>
+          <!-- Em Andamento / Pendentes -->
+          <div class="bg-surface-container-lowest p-5 rounded-xl shadow-sm flex flex-col justify-between">
+            <div class="flex items-center justify-between mb-3">
+              <span class="font-label-md text-label-md text-on-surface-variant">Pendentes</span>
+              <span
+                class="w-8 h-8 rounded-lg bg-secondary-container/40 flex items-center justify-center text-secondary">
+                <span class="material-symbols-outlined text-[18px]">pending_actions</span>
+              </span>
+            </div>
+            <div class="flex items-baseline gap-2">
+              <span class="font-display text-display text-secondary font-semibold" id="metricPending">0</span>
+              <span class="font-body-sm text-body-sm text-outline">em aberto</span>
+            </div>
+          </div>
+          <!-- Concluídas -->
+          <div class="bg-surface-container-lowest p-5 rounded-xl shadow-sm flex flex-col justify-between">
+            <div class="flex items-center justify-between mb-3">
+              <span class="font-label-md text-label-md text-on-surface-variant">Concluídas</span>
+              <span class="w-8 h-8 rounded-lg bg-primary-fixed flex items-center justify-center text-primary-container">
+                <span class="material-symbols-outlined text-[18px]">task_alt</span>
+              </span>
+            </div>
+            <div class="flex items-baseline gap-2">
+              <span class="font-display text-display text-primary font-semibold" id="metricDone">3</span>
+              <span class="font-body-sm text-body-sm text-outline">resolvidas</span>
+            </div>
+          </div>
+        </div>
+        <!-- Main Tasks Section -->
+        <div class="w-full flex flex-col gap-5">
+          
+          <!-- Filter Bar -->
+          <div
+            class="flex flex-wrap items-center justify-between gap-3 bg-surface-container-lowest p-2 rounded-xl shadow-sm">
+            <div class="flex items-center gap-1.5 overflow-x-auto" id="filterContainer">
+              <button
+                class="filter-btn active-filter px-3.5 py-1.5 rounded-full font-label-md text-label-md bg-primary text-on-primary transition-all"
+                data-filter="all">
+                Todas
+              </button>
+              <button
+                class="filter-btn px-3.5 py-1.5 rounded-full font-label-md text-label-md bg-surface-container-low text-on-surface-variant hover:bg-surface-container transition-all"
+                data-filter="today">
+                Hoje
+              </button>
+              <button
+                class="filter-btn px-3.5 py-1.5 rounded-full font-label-md text-label-md bg-surface-container-low text-on-surface-variant hover:bg-surface-container transition-all"
+                data-filter="pending">
+                Pendentes
+              </button>
+              <button
+                class="filter-btn px-3.5 py-1.5 rounded-full font-label-md text-label-md bg-surface-container-low text-on-surface-variant hover:bg-surface-container transition-all"
+                data-filter="done">
+                Concluídas
+              </button>
+            </div>
+          </div>
+
+          <!-- Task List Container -->
+          <div class="flex flex-col gap-3" id="tasksList"></div>
+        </div>
+        <!-- Modal for Creating New Task -->
+        <div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-on-background/40 backdrop-blur-sm hidden"
+          id="modalNewTask">
+          <div
+            class="bg-surface-container-lowest rounded-xl max-w-md w-full p-6 shadow-xl flex flex-col gap-4 animate-in fade-in zoom-in duration-150">
+            <div class="flex items-center justify-between">
+              <h3 class="font-title-sm text-title-sm text-primary">Nova Tarefa</h3>
+              <button class="p-1 rounded-lg hover:bg-surface-container text-on-surface-variant" id="btnCloseModal">
+                <span class="material-symbols-outlined text-[20px]">close</span>
+              </button>
+            </div>
+            <div class="flex flex-col gap-3">
+              <div>
+                <label class="font-label-sm text-label-sm text-on-surface-variant mb-1 block">Título</label>
+                <input
+                  class="w-full px-3 py-2 bg-surface-container-low rounded-lg font-body-md text-body-md text-on-surface placeholder-outline focus:outline-none focus:ring-2 focus:ring-secondary/40"
+                  id="modalInputTitle" placeholder="Ex: Atualizar cronograma de sprints" type="text">
+              </div>
+              <div>
+                <label class="font-label-sm text-label-sm text-on-surface-variant mb-1 block">Descrição /
+                  Detalhes</label>
+                <textarea
+                  class="w-full px-3 py-2 bg-surface-container-low rounded-lg font-body-md text-body-md text-on-surface placeholder-outline focus:outline-none focus:ring-2 focus:ring-secondary/40 resize-none"
+                  id="modalInputDesc" placeholder="Adicione um breve detalhe ou link..." rows="2"></textarea>
+              </div>
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label class="font-label-sm text-label-sm text-on-surface-variant mb-1 block">Prazo (Data)</label>
+                  <input
+                    class="w-full px-3 py-2 bg-surface-container-low rounded-lg font-body-md text-body-md text-on-surface placeholder-outline focus:outline-none focus:ring-2 focus:ring-secondary/40"
+                    id="modalInputScheduledDate" type="date">
+                </div>
+                <div>
+                  <label class="font-label-sm text-label-sm text-on-surface-variant mb-1 block">Status</label>
+                  <select
+                    class="w-full px-3 py-2 bg-surface-container-low rounded-lg font-body-md text-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-secondary/40 cursor-pointer"
+                    id="modalInputStatus">
+                    <option value="pendente">Pendente</option>
+                    <option value="concluido">Concluído</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="flex items-center justify-end gap-2 pt-2">
+              <button
+                class="px-4 py-2 font-label-md text-label-md text-on-surface-variant hover:bg-surface-container rounded-lg transition-colors"
+                id="btnCancelModal">
+                Cancelar
+              </button>
+              <button
+                class="px-4 py-2 font-title-sm text-title-sm bg-primary hover:bg-tertiary text-on-primary rounded-lg shadow-sm transition-colors"
+                id="btnSaveTaskModal">
+                Salvar Tarefa
+              </button>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </main>
+  </div>
+<script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
+<script src="/src/db.js"></script>
+<script src="/src/pages/dashboard/dashboard.js"></script>
+</body>
+
+</html>
